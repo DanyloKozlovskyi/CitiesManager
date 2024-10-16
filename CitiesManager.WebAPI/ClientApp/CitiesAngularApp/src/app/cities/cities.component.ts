@@ -16,17 +16,16 @@ export class CitiesComponent {
 
   }
   ngOnInit() {
-    this.citiesService.getCities()
-      .subscribe(
-        (response: City[]) => {
-          this.cities = response;
-        },
+    this.citiesService.getCities().subscribe({
+       next: (response: City[]) => {
+        this.cities = response;
+      },
 
-        (error: any) => {
+       error: (error: any) => {
           console.log(error);
         },
 
-        () => { }
-      );
+       complete: () => { }
+     });
   }
 }

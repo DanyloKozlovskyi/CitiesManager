@@ -12,6 +12,6 @@ export class CitiesService {
     
   }
   public getCities(): Observable<City[]> {
-    return this.httpClient.get<City[]>("https://localhost:7228");
+    return this.httpClient.get<City[]>("https://localhost:7228/api/City");
   }
 }
