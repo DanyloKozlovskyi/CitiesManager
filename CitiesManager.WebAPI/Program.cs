@@ -33,6 +33,26 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 .AddUserStore<UserStore<ApplicationUser, ApplicationRole, CitiesDbContext, Guid>>()
 .AddRoleStore<RoleStore<ApplicationRole, CitiesDbContext, Guid>>();
 
+//to use cors do that + app.UseCors()
+builder.Services.AddCors(options =>
+{
+	options.AddDefaultPolicy(policyBuilder =>
+	{
+		policyBuilder
+	 .WithOrigins(builder.Configuration.GetSection("AllowedOrigins").Get<string[]>())
+	 .WithHeaders("Authorization", "origin", "accept", "content-type")
+	 .WithMethods("GET", "POST", "PUT", "DELETE");
+	});
+
+	options.AddPolicy("3200Client", policyBuilder =>
+	{
+		policyBuilder
+		.WithOrigins("http://localhost:3200")
+		.WithHeaders("authorization", "origin", "accept", "content-type")
+		.WithMethods("GET");
+	});
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,6 +65,8 @@ app.UseAuthorization();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseRouting();
+app.UseCors();
 
 app.MapControllers();
 

@@ -3,6 +3,7 @@ using CitiesManager.DataAccess;
 using CitiesManager.DataAccess.DTO;
 using CitiesManager.DataAccess.Models;
 using CitiesManager.WebAPI.Util;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,11 +14,14 @@ using System.Linq;
 using System.Threading.Tasks;
 
 // it is necessary to have default constructor for dbContext to scaffold
+//use enable cors attribute to enable custom policies of corses
+//and ng serve --port=3200
 
 namespace CitiesManager.WebAPI.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	//[EnableCors("3200Client")]
 	public class CityController : ControllerBase
 	{
 		private readonly ICitiesService citiesService;
