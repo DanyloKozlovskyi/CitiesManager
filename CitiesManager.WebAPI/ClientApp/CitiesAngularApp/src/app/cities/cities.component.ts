@@ -44,5 +44,21 @@ export class CitiesComponent {
 
   public postCitySubmitted() {
     this.isPostCityFormSubmitted = true;
+    console.log(this.postCityForm.value);
+
+    this.citiesService.postCities(this.postCityForm.value).subscribe({
+      next: (response: City) => {
+        console.log(response);
+
+        this.loadCities();
+        //this.cities.push(response);
+      },
+
+      error: (error: any) => {
+        console.log(error);
+      },
+
+      complete: () => { }
+    });
   }
 }
