@@ -14,6 +14,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class CitiesComponent {
   cities: City[] = [];
   postCityForm: FormGroup;
+  isPostCityFormSubmitted: boolean = false;
   constructor(private citiesService: CitiesService) {
     this.postCityForm = new FormGroup({
       name: new FormControl(null, [Validators.required])
@@ -42,6 +43,6 @@ export class CitiesComponent {
   }
 
   public postCitySubmitted() {
-
+    this.isPostCityFormSubmitted = true;
   }
 }
