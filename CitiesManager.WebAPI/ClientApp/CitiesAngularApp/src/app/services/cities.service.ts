@@ -30,4 +30,10 @@ export class CitiesService {
 
     return this.httpClient.put<string>(`${API_BASE_URL}city/${city.id}`, city, { headers: headers });
   }
+  public deleteCity(id: string | null): Observable<string> {
+    let headers = new HttpHeaders();
+    headers = headers.append("Authorization", "Bearer mytoken");
+
+    return this.httpClient.delete<string>(`${API_BASE_URL}city/${id}`, { headers: headers });
+  }
 }

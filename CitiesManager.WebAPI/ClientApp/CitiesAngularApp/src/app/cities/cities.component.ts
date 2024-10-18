@@ -103,4 +103,23 @@ export class CitiesComponent {
       }
     })
   }
+
+  public deleteClicked(city: City, i: number): void {
+    if (confirm(`Are you sure to delete this city: ${city.name}?`)) {
+      this.citiesService.deleteCity(city.id).subscribe({
+        next: (response: string) => {
+          console.log(response);
+          this.editId = null;
+
+          this.putCityFormArray.removeAt(i);
+          this.cities.splice(i, 1);
+        },
+        error: (error: any) => {
+          console.log(error);
+        },
+        complete: () => { }
+
+      })
+    }
+  }
 }
