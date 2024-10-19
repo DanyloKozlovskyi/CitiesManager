@@ -26,6 +26,7 @@ builder.Services.AddDbContext<CitiesDbContext>(options =>
 // Enable identity 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 {
+	options.Password.RequireDigit = false;
 	options.Password.RequireNonAlphanumeric = false;
 	options.Password.RequireUppercase = false;
 }).AddEntityFrameworkStores<CitiesDbContext>()

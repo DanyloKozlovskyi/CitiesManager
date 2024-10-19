@@ -36,7 +36,7 @@ namespace CitiesManager.WebAPI.Controllers
 			mapper = map.CreateMapper();
 		}
 
-		[HttpPost]
+		[HttpPost("register")]
 		public async Task<IActionResult> PostRegister(RegisterDTO registerDTO)
 		{
 			// Validation 
