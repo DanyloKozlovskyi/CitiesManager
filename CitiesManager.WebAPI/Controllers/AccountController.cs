@@ -103,7 +103,7 @@ namespace CitiesManager.WebAPI.Controllers
 
 				var authenticationResponse = jwtService.CreateJwtToken(user);
 
-				return Ok(authenticationResponse);
+				return Ok(loginDTO);
 			}
 			return Problem("Invalid email or password");
 		}
