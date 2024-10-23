@@ -3,7 +3,8 @@ import { City } from '../models/city';
 import { CitiesService } from '../services/cities.service';
 import { CommonModule } from '@angular/common';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DisableControlDirective } from '../directives/disable-control.directive'
+import { DisableControlDirective } from '../directives/disable-control.directive';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-cities',
@@ -19,7 +20,7 @@ export class CitiesComponent {
 
   putCityForm: FormGroup;
   editId: string | null = null;
-  constructor(private citiesService: CitiesService) {
+  constructor(private citiesService: CitiesService, private accountService: AccountService) {
     this.postCityForm = new FormGroup({
       name: new FormControl(null, [Validators.required])
     })
@@ -121,5 +122,19 @@ export class CitiesComponent {
 
       })
     }
+  }
+
+  refreshClicked(): void {
+    this.accountService.postGenerateNewToken().subscribe({
+      next: (response: any) => {
+        localStorage["token"] = response.token;
+        localStorage["refreshToken"] = response.refreshToken;
+        
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+      complete: () => { }
+    });
   }
 }

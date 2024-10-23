@@ -13,7 +13,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-
   constructor(public accountService: AccountService, private router: Router) {
 
   }
@@ -24,14 +23,15 @@ export class AppComponent {
         console.log(response);
         this.accountService.currentUserName = null;
 
+        localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken");
         this.router.navigate(['/login']);
-        
       },
       error: (error) => {
         console.log(error);
       },
       complete: () => {
-
+        
       }
     });
   }
