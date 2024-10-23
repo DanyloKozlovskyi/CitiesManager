@@ -3,6 +3,7 @@ using CitiesManager.DataAccess;
 using CitiesManager.DataAccess.DTO;
 using CitiesManager.DataAccess.Models;
 using CitiesManager.WebAPI.Util;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,7 @@ namespace CitiesManager.WebAPI.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
+	[AllowAnonymous]
 	//[EnableCors("3200Client")]
 	public class CityController : ControllerBase
 	{
